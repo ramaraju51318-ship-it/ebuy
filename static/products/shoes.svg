@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" role="img" aria-label="Shoes illustration">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#2c6f8f"/>
+      <stop offset="100%" stop-color="#9cd8f4"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="220" rx="28" fill="url(#g)"/>
+  <path d="M74 118c42-28 88-35 128-16 17 8 32 19 44 34H80c-3-8-4-12-6-18z" fill="#fff"/>
+  <rect x="90" y="136" width="146" height="14" rx="7" fill="#d7eff9"/>
+  <text x="160" y="176" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#16455c">Shoes</text>
+</svg>

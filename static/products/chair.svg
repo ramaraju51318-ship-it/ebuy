@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" role="img" aria-label="Chair illustration">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#8b4a31"/>
+      <stop offset="100%" stop-color="#f1c29b"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="220" rx="28" fill="url(#g)"/>
+  <rect x="110" y="64" width="100" height="60" rx="18" fill="#fff"/>
+  <rect x="92" y="124" width="136" height="18" rx="9" fill="#fff"/>
+  <rect x="102" y="142" width="24" height="36" rx="8" fill="#fff"/>
+  <rect x="194" y="142" width="24" height="36" rx="8" fill="#fff"/>
+  <text x="160" y="176" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#6d391f">Chair</text>
+</svg>

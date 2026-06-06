@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Product - E buy</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="portal narrow">
+        <section class="panel">
+            <a class="back-link" href="{{ url_for('dashboard') }}">Back to dashboard</a>
+            <p class="eyebrow">Supplier</p>
+            <h1>List a product</h1>
+            <p class="intro-text">Upload at least 2 images so buyers can see your product clearly.</p>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="messages">
+                        {% for category, message in messages %}
+                            <p class="message {{ category }}">{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <form action="{{ url_for('list_product') }}" method="POST" enctype="multipart/form-data">
+                <input type="text" name="item_name" placeholder="Item name" required>
+                <textarea name="item_description" placeholder="Item description" required></textarea>
+                <div class="form-grid">
+                    <input type="number" min="0" step="0.01" name="item_price" placeholder="Price" required>
+                    <input type="number" min="1" name="item_quantity" placeholder="Quantity" required>
+                </div>
+                <label for="item_images">Upload at least 2 product images</label>
+                <input type="file" id="item_images" name="item_images" accept="image/*" multiple required>
+                <button type="submit">List product</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Orders - E buy</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="dashboard">
+        <section class="panel dashboard-panel">
+            <a class="back-link" href="{{ url_for('dashboard') }}">Back to home</a>
+            <p class="eyebrow">Buyer</p>
+            <h1>Your orders</h1>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="messages">
+                        {% for category, message in messages %}
+                            <p class="message {{ category }}">{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            {% if orders %}
+                <section class="product-grid order-grid">
+                    {% for order in orders %}
+                        <article class="product-card order-card">
+                            <div class="product-content">
+                                <p class="product-category">Order {{ order.order_number }}</p>
+                                <div class="order-highlight">
+                                    <h3>{{ order['items'][0]['name'] if order['items'] else 'Your order' }}</h3>
+                                    <p class="order-date">Placed on {{ order.created_at }}</p>
+                                </div>
+                                <div class="order-summary-pills">
+                                    <span>Status: {{ order.status }}</span>
+                                    <span>Total: Rs. {{ order.total }}</span>
+                                    <span>Items: {{ order['items']|length }}</span>
+                                </div>
+                                <div class="tracking-box">
+                                    <p class="tracking-label">Tracking code</p>
+                                    <strong>{{ order.tracking.tracking_code }}</strong>
+                                    <p class="tracking-note">Expected delivery: {{ order.expected_delivery }}</p>
+                                </div>
+                                <div class="timeline-list">
+                                    {% for step in order.tracking.timeline %}
+                                        <div class="timeline-row {% if step.current %}current{% elif step.done %}done{% endif %}">
+                                            <span class="timeline-dot"></span>
+                                            <div>
+                                                <strong>{{ step.label }}</strong>
+                                                <p>{{ step.detail }}</p>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                {% for item in order['items'] %}
+                                    <div class="order-item-row">
+                                        {% set image_urls = item.image_urls if item.image_urls else [item.image_path] %}
+                                        <img class="mini-order-image" src="{{ image_urls[0] if image_urls[0].startswith('http') else url_for('static', filename=image_urls[0]) }}" alt="{{ item.name }} image">
+                                        <div>
+                                            <strong>{{ item.name }}</strong>
+                                            <p>{{ item.description }}</p>
+                                            <small>Qty: {{ item.quantity }} • Rs. {{ item.price }}</small>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </article>
+                    {% endfor %}
+                </section>
+                <div class="order-home-cta">
+                    <a class="btn btn-primary" href="{{ url_for('dashboard') }}">Back to home</a>
+                </div>
+            {% else %}
+                <p class="intro-text">You have not placed any orders yet.</p>
+                <div class="order-home-cta">
+                    <a class="btn btn-primary" href="{{ url_for('dashboard') }}">Back to home</a>
+                </div>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>

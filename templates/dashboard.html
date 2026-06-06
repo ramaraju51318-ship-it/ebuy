@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E buy Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="dashboard">
+        <section class="panel dashboard-panel {% if user.role == 'buyer' %}buyer-marketplace{% endif %}">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="messages">
+                        {% for category, message in messages %}
+                            <p class="message {{ category }}">{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <div class="dashboard-header">
+                <div>
+                    <p class="eyebrow">E buy</p>
+                    <h1>{{ user.full_name }}</h1>
+                </div>
+                <div class="dashboard-actions">
+                    {% if user.role == 'buyer' %}
+                        <a class="logout account-toggle" href="#" onclick="event.preventDefault(); document.getElementById('account-panel').classList.toggle('open');">Account</a>
+                        <a class="logout" href="{{ url_for('cart') }}">View cart ({{ cart_items|length }})</a>
+                        <a class="logout" href="{{ url_for('orders') }}">Orders</a>
+                        <a class="logout" href="{{ url_for('recharge') }}">Recharge</a>
+                    {% endif %}
+                    <a class="logout" href="{{ url_for('logout') }}">Logout</a>
+                </div>
+            </div>
+
+            {% if user.role != 'buyer' %}
+                <dl class="details">
+                    <div>
+                        <dt>Username</dt>
+                        <dd>{{ user.username }}</dd>
+                    </div>
+                    <div>
+                        <dt>Email</dt>
+                        <dd>{{ user.email }}</dd>
+                    </div>
+                    <div>
+                        <dt>Phone</dt>
+                        <dd>{{ user.phone }}</dd>
+                    </div>
+                    <div>
+                        <dt>Address</dt>
+                        <dd>{{ user.address }}</dd>
+                    </div>
+                    <div>
+                        <dt>Credits</dt>
+                        <dd>{{ user.credits or 0 }}</dd>
+                    </div>
+                </dl>
+            {% endif %}
+
+            {% if user.role == "supplier" %}
+                <section class="item-summary">
+                    <h2>Listed Item</h2>
+                    {% if user.item and user.item.name %}
+                        <p class="item-name">{{ user.item.name }}</p>
+                        <p>{{ user.item.description }}</p>
+                        <div class="item-meta">
+                            <span>Price: {{ user.item.price }}</span>
+                            <span>Quantity: {{ user.item.quantity }}</span>
+                        </div>
+                        {% if user.item.image_paths %}
+                            <div class="image-gallery">
+                                {% for image in user.item.image_paths %}
+                                    <img src="{{ url_for('static', filename=image) }}" alt="{{ user.item.name }} image {{ loop.index }}">
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        <p>You have not listed a product yet. Add one below to start selling.</p>
+                        <a class="logout" href="{{ url_for('list_product') }}">List a product</a>
+                    {% endif %}
+                    {% if user.item and user.item.name %}
+                        <p class="small-note">Need to update or replace the listing? Use the form below to add a new item.</p>
+                    {% endif %}
+                    <a class="logout" href="{{ url_for('list_product') }}">List a product</a>
+                </section>
+            {% else %}
+                <section class="marketplace-heading">
+                    <div>
+                        <p class="eyebrow">Product Marketplace</p>
+                        <h2>Products available for you</h2>
+                        <p class="intro-text">Search by product name, category, seller, or keyword to find what you need.</p>
+                    </div>
+                    <span>{{ products|length }} products</span>
+                </section>
+
+                <form class="search-box" method="GET" action="{{ url_for('dashboard') }}">
+                    <input type="search" name="search" value="{{ search_query }}" placeholder="Search products, sellers, or categories">
+                    <button type="submit">Search</button>
+                </form>
+
+                <section class="product-grid">
+                    {% for product in products %}
+                        <article class="product-card">
+                            <div class="product-image">
+                                {% set images = product.image_paths if product.image_paths else [product.image_path] %}
+                                <img src="{{ url_for('static', filename=images[0]) }}" alt="{{ product.name }} image">
+                            </div>
+                            <div class="product-content">
+                                <p class="product-category">{{ product.category }}</p>
+                                <h3>{{ product.name }}</h3>
+                                <p>{{ product.description }}</p>
+                                <div class="product-meta">
+                                    <span>Seller: {{ product.seller }}</span>
+                                    <span>Qty: {{ product.quantity }}</span>
+                                    {% if product.quantity|int <= 0 %}
+                                        <span class="stock-badge out">Out of stock</span>
+                                    {% else %}
+                                        <span class="stock-badge in">In stock</span>
+                                    {% endif %}
+                                </div>
+                                <div class="product-footer">
+                                    <strong>Rs. {{ product.price }}</strong>
+                                    <div class="product-actions">
+                                        {% if product.quantity|int > 0 %}
+                                            <a class="mini-btn" href="{{ url_for('add_to_cart', item_index=loop.index0) }}">Add to cart</a>
+                                            <a class="mini-btn primary" href="{{ url_for('buy_now', item_index=loop.index0) }}">Buy now</a>
+                                        {% else %}
+                                            <span class="mini-btn disabled">Unavailable</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </section>
+
+                {% if user.role == 'buyer' %}
+                    <section id="account-panel" class="account-panel">
+                        <article class="account-card">
+                            <p class="eyebrow">Account overview</p>
+                            <h2>Welcome, {{ user.full_name }}</h2>
+                            <p class="intro-text">Your account details are available here when you need them.</p>
+                            <dl class="details">
+                                <div>
+                                    <dt>Username</dt>
+                                    <dd>{{ user.username }}</dd>
+                                </div>
+                                <div>
+                                    <dt>Email</dt>
+                                    <dd>{{ user.email }}</dd>
+                                </div>
+                                <div>
+                                    <dt>Phone</dt>
+                                    <dd>{{ user.phone }}</dd>
+                                </div>
+                                <div>
+                                    <dt>Address</dt>
+                                    <dd>{{ user.address }}</dd>
+                                </div>
+                                <div>
+                                    <dt>Credits</dt>
+                                    <dd>{{ user.credits or 0 }}</dd>
+                                </div>
+                            </dl>
+                        </article>
+                        <aside class="stats-card">
+                            <p class="eyebrow">Quick stats</p>
+                            <h2>Your wallet</h2>
+                            <div class="stats-grid">
+                                <div class="stat-pill"><span>Credits</span><strong>Rs. {{ user.credits or 0 }}</strong></div>
+                                <div class="stat-pill"><span>Cart items</span><strong>{{ cart_items|length }}</strong></div>
+                                <div class="stat-pill"><span>Products in view</span><strong>{{ products|length }}</strong></div>
+                            </div>
+                        </aside>
+                    </section>
+                {% endif %}
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>

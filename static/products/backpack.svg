@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" role="img" aria-label="Backpack illustration">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#c56a19"/>
+      <stop offset="100%" stop-color="#ffd28d"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="220" rx="28" fill="url(#g)"/>
+  <path d="M120 78c0-22 18-40 40-40h0c22 0 40 18 40 40v18h-80V78z" fill="#fff"/>
+  <rect x="96" y="92" width="128" height="78" rx="20" fill="#fff"/>
+  <rect x="130" y="54" width="60" height="18" rx="9" fill="#ffefcf"/>
+  <text x="160" y="176" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#8a4e0f">Backpack</text>
+</svg>

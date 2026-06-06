@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 120" role="img" aria-labelledby="title desc">
+  <title id="title">E buy shopping cart symbol</title>
+  <desc id="desc">A shopping cart filled with ecommerce items for E buy.</desc>
+  <rect width="180" height="120" rx="24" fill="#e8f6f0"/>
+  <circle cx="132" cy="24" r="18" fill="#dce8f2"/>
+  <circle cx="48" cy="95" r="12" fill="#20242a"/>
+  <circle cx="48" cy="95" r="5" fill="#dce8f2"/>
+  <circle cx="124" cy="95" r="12" fill="#20242a"/>
+  <circle cx="124" cy="95" r="5" fill="#dce8f2"/>
+  <path d="M22 26h18l18 53h75c6 0 11-4 13-10l10-34H52" fill="none" stroke="#246b55" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M61 50h82" stroke="#7fc8a6" stroke-width="7" stroke-linecap="round"/>
+  <path d="M66 66h70" stroke="#7fc8a6" stroke-width="7" stroke-linecap="round"/>
+  <rect x="62" y="28" width="24" height="26" rx="6" fill="#f6c66f"/>
+  <path d="M62 41h24" stroke="#c99436" stroke-width="4"/>
+  <rect x="94" y="20" width="28" height="34" rx="7" fill="#ffffff" stroke="#bfd1c9" stroke-width="4"/>
+  <path d="M101 34h14M101 43h10" stroke="#246b55" stroke-width="4" stroke-linecap="round"/>
+  <path d="M137 44l12-12 8 8-20 20-12-12 8-8z" fill="#246b55"/>
+</svg>

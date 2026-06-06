@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review & Confirm Order - E buy</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="dashboard">
+        <section class="panel dashboard-panel">
+            <a class="back-link" href="{{ url_for('cart') }}">Back to cart</a>
+            <p class="eyebrow">Checkout</p>
+            <h1>Review your order</h1>
+            <p class="intro-text">Confirm the product, delivery address, and wallet deduction before placing your order.</p>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="messages">
+                        {% for category, message in messages %}
+                            <p class="message {{ category }}">{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <div class="details">
+                <div>
+                    <dt>Buyer</dt>
+                    <dd>{{ buyer.full_name }}</dd>
+                </div>
+                <div>
+                    <dt>Current credits</dt>
+                    <dd>Rs. {{ buyer.credits or 0 }}</dd>
+                </div>
+                <div>
+                    <dt>Credits after purchase</dt>
+                    <dd>Rs. {{ buyer.credits - total_cost if buyer.credits is not none else 0 }}</dd>
+                </div>
+                <div>
+                    <dt>Delivery address</dt>
+                    <dd>{{ buyer.address }}</dd>
+                </div>
+            </div>
+
+            <section class="product-grid">
+                {% for product in cart_items %}
+                    <article class="product-card">
+                        <div class="product-image">
+                            {% set image_urls = product.image_urls if product.image_urls else [product.image_path] %}
+                            <img src="{{ image_urls[0] if image_urls[0].startswith('http') else url_for('static', filename=image_urls[0]) }}" alt="{{ product.name }} image">
+                        </div>
+                        <div class="product-content">
+                            <p class="product-category">{{ product.category }}</p>
+                            <h3>{{ product.name }}</h3>
+                            <p>{{ product.description }}</p>
+                            <div class="product-meta">
+                                <span>Seller: {{ product.seller }}</span>
+                                <span>Qty: {{ product.quantity }}</span>
+                            </div>
+                            <div class="product-meta">
+                                <span>Price: Rs. {{ product.price }}</span>
+                                <span>Credits to deduct: Rs. {{ product.price }}</span>
+                            </div>
+                            <div class="review-box">
+                                <strong>Customer reviews</strong>
+                                {% for review in product.reviews %}
+                                    <p>{{ review }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </article>
+                {% endfor %}
+            </section>
+
+            <section class="panel">
+                <h2>Confirm purchase</h2>
+                <p class="intro-text">You are about to spend Rs. {{ total_cost }} from your wallet to complete this order.</p>
+                <form action="{{ url_for('checkout') }}" method="POST">
+                    <button type="submit">Confirm order</button>
+                </form>
+            </section>
+        </section>
+    </main>
+</body>
+</html>

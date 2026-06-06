@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - E buy</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="dashboard">
+        <section class="panel dashboard-panel">
+            <a class="back-link" href="{{ url_for('dashboard') }}">Back to dashboard</a>
+            <p class="eyebrow">Buyer</p>
+            <h1>Your cart</h1>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="messages">
+                        {% for category, message in messages %}
+                            <p class="message {{ category }}">{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            {% if cart_items %}
+                <section class="product-grid">
+                    {% for product in cart_items %}
+                        <article class="product-card">
+                            <div class="product-image">
+                                {% set images = product.image_paths if product.image_paths else [product.image_path] %}
+                                <img src="{{ url_for('static', filename=images[0]) }}" alt="{{ product.name }} image">
+                            </div>
+                            <div class="product-content">
+                                <p class="product-category">{{ product.category }}</p>
+                                <h3>{{ product.name }}</h3>
+                                <p>{{ product.description }}</p>
+                                <div class="product-meta">
+                                    <span>Seller: {{ product.seller }}</span>
+                                    <span>Qty: {{ product.quantity }}</span>
+                                </div>
+                                <div class="product-footer">
+                                    <strong>Rs. {{ product.price }}</strong>
+                                    <div class="product-actions">
+                                        <a class="mini-btn" href="{{ url_for('dashboard') }}">Continue shopping</a>
+                                        <form action="{{ url_for('checkout') }}" method="POST">
+                                            <button class="mini-btn primary" type="submit">Place order</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </section>
+            {% else %}
+                <p class="intro-text">Your cart is empty. Add some products from the marketplace to get started.</p>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>

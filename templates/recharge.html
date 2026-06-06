@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recharge Wallet - E buy</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="portal narrow">
+        <section class="panel">
+            <a class="back-link" href="{{ url_for('dashboard') }}">Back to dashboard</a>
+            <p class="eyebrow">Wallet</p>
+            <h1>Recharge your wallet</h1>
+            <p class="intro-text">Add credits to your wallet using a secure card debit simulation. Credits work like rupees in this portal.</p>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="messages">
+                        {% for category, message in messages %}
+                            <p class="message {{ category }}">{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            <form action="{{ url_for('recharge') }}" method="POST">
+                <input type="text" name="card_number" placeholder="Card number" required>
+                <input type="text" name="card_holder" placeholder="Card holder name" required>
+                <input type="text" name="cvv" placeholder="CVV" required>
+                <input type="number" min="1" step="0.01" name="amount" placeholder="Recharge amount in rupees" required>
+                <button type="submit">Recharge wallet</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

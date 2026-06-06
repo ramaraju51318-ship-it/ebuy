@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E buy</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="portal">
+        <section class="home-hero">
+            <div class="hero-copy">
+                <div class="brand-row">
+                    <img class="brand-logo" src="{{ url_for('static', filename='e-buy-cart.svg') }}" alt="E buy shopping cart symbol">
+                    <span>E buy</span>
+                </div>
+                <p class="eyebrow">Fast marketplace access</p>
+                <h1>Shop smarter and sell faster with E buy.</h1>
+                <p class="intro-text">
+                    Create a buyer account to start shopping, or register as a supplier and list your first item for sale.
+                </p>
+            </div>
+            <div class="hero-visual" aria-hidden="true">
+                <img src="{{ url_for('static', filename='e-buy-cart.svg') }}" alt="">
+                <div class="hero-stat">
+                    <strong>2</strong>
+                    <span>easy registration paths</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="intro">
+            <p class="eyebrow">Registration</p>
+            <h2>Choose how you want to join.</h2>
+            <p class="intro-text">
+                Each registration path opens a separate page with only the fields needed for that account type.
+            </p>
+        </section>
+
+        <section class="feature-strip">
+            <article class="feature-card">
+                <span>🛍️</span>
+                <h3>Modern shopping</h3>
+                <p>Browse products with polished cards, live stock badges, and a smooth buying flow.</p>
+            </article>
+            <article class="feature-card">
+                <span>💳</span>
+                <h3>Wallet-powered checkout</h3>
+                <p>Buyers recharge credits, confirm orders, and track purchases with animated, clear steps.</p>
+            </article>
+            <article class="feature-card">
+                <span>📸</span>
+                <h3>Seller-ready uploads</h3>
+                <p>Suppliers can list products with rich image galleries and a fresh marketplace look.</p>
+            </article>
+        </section>
+
+        <section class="panel-grid">
+            <div class="panel">
+                <h2>Register</h2>
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="messages">
+                            {% for category, message in messages %}
+                                <p class="message {{ category }}">{{ message }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+
+                <div class="registration-links">
+                    <a class="choice-link" href="{{ url_for('buyer_registration') }}">
+                        <span>Buyer Registration</span>
+                        <small>Create an account to shop on the portal.</small>
+                    </a>
+                    <a class="choice-link" href="{{ url_for('supplier_registration') }}">
+                        <span>Supplier Registration</span>
+                        <small>Create an account and add an item to sell.</small>
+                    </a>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h2>Login</h2>
+                <form action="{{ url_for('login') }}" method="POST">
+                    <input type="text" name="login_username" placeholder="Username" required>
+                    <input type="password" name="login_password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
