@@ -12,6 +12,7 @@
             <a class="back-link" href="{{ url_for('dashboard') }}">Back to home</a>
             <p class="eyebrow">Buyer</p>
             <h1>Your orders</h1>
+            <p class="intro-text">Track every delivery step in real time, just like a modern marketplace dashboard.</p>
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                     <div class="messages">
@@ -37,22 +38,33 @@
                                     <span>Total: Rs. {{ order.total }}</span>
                                     <span>Items: {{ order['items']|length }}</span>
                                 </div>
-                                <div class="tracking-box">
-                                    <p class="tracking-label">Tracking code</p>
-                                    <strong>{{ order.tracking.tracking_code }}</strong>
+                                <details id="track-{{ loop.index0 }}" class="tracking-box">
+                                    <summary class="track-order-toggle">
+                                        <span>
+                                            <span class="tracking-label">Tracking code</span>
+                                            <strong>{{ order.tracking.tracking_code }}</strong>
+                                        </span>
+                                        <span class="mini-btn primary">Track order</span>
+                                    </summary>
                                     <p class="tracking-note">Expected delivery: {{ order.expected_delivery }}</p>
-                                </div>
-                                <div class="timeline-list">
-                                    {% for step in order.tracking.timeline %}
-                                        <div class="timeline-row {% if step.current %}current{% elif step.done %}done{% endif %}">
-                                            <span class="timeline-dot"></span>
-                                            <div>
-                                                <strong>{{ step.label }}</strong>
-                                                <p>{{ step.detail }}</p>
+                                    <div class="tracking-pills">
+                                        <span>Placed: {{ order.created_at }}</span>
+                                        <span>Shipped: {{ order.expected_delivery }}</span>
+                                        <span>In transit</span>
+                                        <span>Delivery updates live</span>
+                                    </div>
+                                    <div class="timeline-list">
+                                        {% for step in order.tracking.timeline %}
+                                            <div class="timeline-row {% if step.current %}current{% elif step.done %}done{% endif %}">
+                                                <span class="timeline-dot"></span>
+                                                <div>
+                                                    <strong>{{ step.label }}</strong>
+                                                    <p>{{ step.detail }}</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    {% endfor %}
-                                </div>
+                                        {% endfor %}
+                                    </div>
+                                </details>
                                 {% for item in order['items'] %}
                                     <div class="order-item-row">
                                         {% set image_urls = item.image_urls if item.image_urls else [item.image_path] %}

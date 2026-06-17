@@ -1,0 +1,15 @@
+name: Local Qwen3 Assistant
+version: 1.0.0
+schema: v1
+
+models:
+  - name: Qwen3 4B
+    provider: ollama
+    model: qwen3:4b
+    roles:
+      - chat
+      - edit
+      - apply
+      - summarize
+
+mcpServers: []

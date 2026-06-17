@@ -12,17 +12,6 @@
             "credits": 100000
         },
         {
-            "role": "buyer",
-            "full_name": "ajay",
-            "username": "ajay",
-            "email": "ajayvarmak4@gmail.com",
-            "phone": "9740884164",
-            "address": "abc",
-            "password_hash": "scrypt:32768:8:1$fbIlLy7mqLjl5vD3$82d68680bf1e7f26401d297ff561bede7efebdb1fb0c17b226d3ff08efd23b2bb0f6e662e9c4e272e050e1e560c066749922ba333d80ab031de176e0cf537f83",
-            "created_at": "2026-06-05 21:53:28",
-            "credits": 100000
-        },
-        {
             "role": "supplier",
             "full_name": "ramaraju",
             "username": "ramaraju",
@@ -35,20 +24,9 @@
                 "name": "washing machine",
                 "description": "electronics",
                 "price": "3000",
-                "quantity": "3"
+                "quantity": 1
             },
-            "credits": 0
-        },
-        {
-            "role": "buyer",
-            "full_name": "ram",
-            "username": "1212",
-            "email": "ram@gmail.com",
-            "phone": "9740884164",
-            "address": "5-45\r\nAnanthavaram",
-            "password_hash": "scrypt:32768:8:1$DNTP8fl5uIDzUxnc$dbdb0e33bc37a760fd4e128196d58a235c57e42708a48403cc46c9e5255d3416bc62cf618f2d53e59129bbb1906c7940187244c5d3171106efbd6f73ec5d51a2",
-            "created_at": "2026-06-06 09:31:33",
-            "credits": 82502.0
+            "credits": 5400.0
         },
         {
             "role": "buyer",
@@ -70,13 +48,7 @@
             "address": "y",
             "password_hash": "scrypt:32768:8:1$9AwRyoEaHmvZPInf$9e4d96743d1fb9ae0a168650dc437f7df684e05c75d6efa3e8dfedd166665ae0299be6a3da31e0890e4cf5785fa298a4995c7d5ecc714421a918f59952d8530c",
             "created_at": "2026-06-06 09:37:06",
-            "item": {
-                "name": "Widget",
-                "description": "Desc",
-                "price": "10",
-                "quantity": "5"
-            },
-            "credits": 0
+            "credits": 9.0
         },
         {
             "role": "buyer",
@@ -102,10 +74,10 @@
                 "name": "Iqoo",
                 "description": "NEO 10R",
                 "price": "30000",
-                "quantity": "1",
+                "quantity": 10,
                 "image_path": "products/uploads/d653530783bf473bbe2198f589a8eec3.jpg"
             },
-            "credits": 27000.0
+            "credits": 108000.0
         },
         {
             "role": "buyer",
@@ -117,6 +89,50 @@
             "password_hash": "scrypt:32768:8:1$6MljWlzkn9QbthLU$14647325257c559e6f5054319ff72a12a7eb8c86f83b0b02add18396e78fc4a1dba7fd84e03a262deb2bfd40a3546171aa34b6b97c8ee8784040f6fc8fb24b85",
             "credits": 37503.0,
             "created_at": "2026-06-06 10:17:00"
+        },
+        {
+            "role": "buyer",
+            "full_name": "asdf",
+            "username": "asdf",
+            "email": "www@gmail.com",
+            "phone": "12",
+            "address": "sdfv",
+            "password_hash": "scrypt:32768:8:1$zdhzDony9Jdaa1g3$18f138c0cbac10fcdf25c15cedfeeb40eb06a9cf73d3fe24048b2ef8b372d06180002853d52c4ecf0352cc45464a40da91b6f309245c021b6fdfbcf5669093d6",
+            "credits": 100000,
+            "created_at": "2026-06-08 10:13:55"
+        },
+        {
+            "role": "buyer",
+            "full_name": "Rama raju uppalapati",
+            "username": "12121212",
+            "email": "ramaraju51318@gmail.com",
+            "phone": "1234567890",
+            "address": "5-45\r\nAnanthavaram",
+            "password_hash": "scrypt:32768:8:1$nfVfkmzYXv99G7kE$69b08ee0c40ee271b4e6fc79e3f41aee7e684aa4383c020c0279e1855c54129b569aaa474ee075d16a090298ff538baf161daa1c6ecf909189fa6cef0b60641c",
+            "credits": 70000.0,
+            "created_at": "2026-06-11 12:52:30"
+        },
+        {
+            "role": "buyer",
+            "full_name": "Rama raju uppalapati",
+            "username": "111111",
+            "email": "ramaraju318@gmail.com",
+            "phone": "1234567890",
+            "address": "5-45\r\nAnanthavaram",
+            "password_hash": "scrypt:32768:8:1$Z9yRUDQi3P2daEtM$fc4858016454b7dcd7e46767d305f8db967a1ee167b9859a29bdc0cce82f9ee097b2b3ea993c108b8a72ddbc0aef43c61adb579be9ec2f84c9b5493b28fa4fdb",
+            "credits": 100000,
+            "created_at": "2026-06-14 17:56:05"
+        },
+        {
+            "role": "buyer",
+            "full_name": "qwerty",
+            "username": "qwerty",
+            "email": "qwert@gmail.com",
+            "phone": "1234567891",
+            "address": "2ertyfrdqs",
+            "password_hash": "scrypt:32768:8:1$CmbdAsaYYz4b3jj0$0a9ead915920f963d3950bad12a912ebec907b23d35fc86097fc6e2b1e3af400bc862edbf8d2f237e6db503d42313dab1fc6e4a345890a1370d34cad8117be92",
+            "credits": 100000,
+            "created_at": "2026-06-14 18:02:52"
         }
     ],
     "orders": [
@@ -288,7 +304,7 @@
                     ],
                     "name": "Iqoo",
                     "price": "30000",
-                    "quantity": "1",
+                    "quantity": "5",
                     "reviews": [
                         "\u2b50 4.8/5 \u2014 Customers love the quality and quick delivery.",
                         "\u2b50 4.7/5 \u2014 Reliable seller and premium packaging.",
@@ -304,7 +320,447 @@
             "expected_delivery": "11 Jun 2026",
             "status": "Placed",
             "created_at": "2026-06-06 10:24:08"
+        },
+        {
+            "order_number": "ORD-20260606120911-7",
+            "buyer": "1212",
+            "items": [
+                {
+                    "category": "Supplier Item",
+                    "description": "electronics",
+                    "image_path": "products/generic.svg",
+                    "image_paths": [
+                        "products/generic.svg"
+                    ],
+                    "image_urls": [
+                        "products/generic.svg"
+                    ],
+                    "name": "washing machine",
+                    "price": "3000",
+                    "quantity": "3",
+                    "reviews": [
+                        "\u2b50 4.8/5 \u2014 Customers love the quality and quick delivery.",
+                        "\u2b50 4.7/5 \u2014 Reliable seller and premium packaging.",
+                        "\u2b50 4.9/5 \u2014 Great value for money and easy returns."
+                    ],
+                    "seller": "ramaraju",
+                    "seller_username": "ramaraju"
+                }
+            ],
+            "total": 3000.0,
+            "platform_fee": 300.0,
+            "seller_share": 2700.0,
+            "expected_delivery": "11 Jun 2026",
+            "status": "Placed",
+            "created_at": "2026-06-06 12:09:11"
+        },
+        {
+            "order_number": "ORD-20260606130839-8",
+            "buyer": "1212",
+            "items": [
+                {
+                    "category": "Electronics",
+                    "description": "Fast 5G phone with bright display, long battery life, and dual camera.",
+                    "image_path": "products/mobile.svg",
+                    "image_paths": [
+                        "products/mobile.svg"
+                    ],
+                    "image_urls": [
+                        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=80"
+                    ],
+                    "name": "5G Smartphone",
+                    "price": "14999",
+                    "quantity": "35",
+                    "reviews": [
+                        "\u2b50 4.8/5 \u2014 Customers love the quality and quick delivery.",
+                        "\u2b50 4.7/5 \u2014 Reliable seller and premium packaging.",
+                        "\u2b50 4.9/5 \u2014 Great value for money and easy returns."
+                    ],
+                    "seller": "Reliance Digital"
+                }
+            ],
+            "total": 14999.0,
+            "platform_fee": 1499.9,
+            "seller_share": 13499.1,
+            "expected_delivery": "11 Jun 2026",
+            "status": "Placed",
+            "created_at": "2026-06-06 13:08:39"
+        },
+        {
+            "order_number": "ORD-20260606142952-9",
+            "buyer": "ramaraju1",
+            "items": [
+                {
+                    "category": "Electronics",
+                    "description": "Full HD smart TV with built-in apps and slim design.",
+                    "image_path": "products/tv.svg",
+                    "image_paths": [
+                        "products/tv.svg"
+                    ],
+                    "image_urls": [
+                        "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=900&q=80"
+                    ],
+                    "name": "LED Smart TV",
+                    "price": "28999",
+                    "quantity": "10",
+                    "reviews": [
+                        "\u2b50 4.8/5 \u2014 Customers love the quality and quick delivery.",
+                        "\u2b50 4.7/5 \u2014 Reliable seller and premium packaging.",
+                        "\u2b50 4.9/5 \u2014 Great value for money and easy returns."
+                    ],
+                    "seller": "Vijay Sales"
+                }
+            ],
+            "total": 28999.0,
+            "platform_fee": 2899.9,
+            "seller_share": 26099.1,
+            "expected_delivery": "11 Jun 2026",
+            "status": "Placed",
+            "created_at": "2026-06-06 14:29:52"
+        },
+        {
+            "order_number": "ORD-20260606143608-10",
+            "buyer": "ramaraju1",
+            "items": [
+                {
+                    "category": "Electronics",
+                    "description": "High speed Wi-Fi router for home internet and streaming.",
+                    "image_path": "products/router.svg",
+                    "image_paths": [
+                        "products/router.svg"
+                    ],
+                    "image_urls": [
+                        "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=900&q=80"
+                    ],
+                    "name": "JioFiber Router",
+                    "price": "2499",
+                    "quantity": "18",
+                    "reviews": [
+                        "\u2b50 4.8/5 \u2014 Customers love the quality and quick delivery.",
+                        "\u2b50 4.7/5 \u2014 Reliable seller and premium packaging.",
+                        "\u2b50 4.9/5 \u2014 Great value for money and easy returns."
+                    ],
+                    "seller": "Jio Store"
+                }
+            ],
+            "total": 2499.0,
+            "platform_fee": 249.9,
+            "seller_share": 2249.1,
+            "expected_delivery": "11 Jun 2026",
+            "status": "Placed",
+            "created_at": "2026-06-06 14:36:08"
+        },
+        {
+            "order_number": "ORD-20260606144249-11",
+            "buyer": "ramaraju1",
+            "items": [
+                {
+                    "category": "Supplier Item",
+                    "description": "NEO 10R",
+                    "image_path": "products/uploads/d653530783bf473bbe2198f589a8eec3.jpg",
+                    "image_paths": [
+                        "products/uploads/d653530783bf473bbe2198f589a8eec3.jpg"
+                    ],
+                    "image_urls": [
+                        "products/uploads/d653530783bf473bbe2198f589a8eec3.jpg"
+                    ],
+                    "name": "Iqoo",
+                    "price": "30000",
+                    "quantity": "5",
+                    "reviews": [
+                        "\u2b50 4.8/5 \u2014 Customers love the quality and quick delivery.",
+                        "\u2b50 4.7/5 \u2014 Reliable seller and premium packaging.",
+                        "\u2b50 4.9/5 \u2014 Great value for money and easy returns."
+                    ],
+                    "seller": "Rama raju uppalapati",
+                    "seller_username": "ramu"
+                }
+            ],
+            "total": 30000.0,
+            "platform_fee": 3000.0,
+            "seller_share": 27000.0,
+            "expected_delivery": "11 Jun 2026",
+            "status": "Placed",
+            "created_at": "2026-06-06 14:42:49"
+        },
+        {
+            "order_number": "ORD-20260606145044-12",
+            "buyer": "ramaraju1",
+            "items": [
+                {
+                    "category": "Electronics",
+                    "description": "Fast 5G phone with bright display, long battery life, and dual camera.",
+                    "image_path": "products/mobile.svg",
+                    "image_paths": [
+                        "products/mobile.svg"
+                    ],
+                    "image_urls": [
+                        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=80"
+                    ],
+                    "name": "5G Smartphone",
+                    "price": "14999",
+                    "quantity": "35",
+                    "reviews": [
+                        "\u2b50 4.8/5 \u2014 Customers love the quality and quick delivery.",
+                        "\u2b50 4.7/5 \u2014 Reliable seller and premium packaging.",
+                        "\u2b50 4.9/5 \u2014 Great value for money and easy returns."
+                    ],
+                    "seller": "Reliance Digital"
+                }
+            ],
+            "total": 14999.0,
+            "platform_fee": 1499.9,
+            "seller_share": 13499.1,
+            "expected_delivery": "11 Jun 2026",
+            "status": "Placed",
+            "created_at": "2026-06-06 14:50:44"
+        },
+        {
+            "order_number": "ORD-20260606160218-13",
+            "buyer": "ramaraju1",
+            "items": [
+                {
+                    "category": "Electronics",
+                    "description": "Portable speaker with punchy sound and all-day battery.",
+                    "image_path": "products/speaker.svg",
+                    "image_paths": [
+                        "products/speaker.svg"
+                    ],
+                    "image_urls": [
+                        "https://images.unsplash.com/photo-1518444065439-e933c06ce9cd?auto=format&fit=crop&w=900&q=80"
+                    ],
+                    "name": "Bluetooth Speaker",
+                    "price": "1299",
+                    "quantity": "28",
+                    "reviews": [
+                        "\u2b50 4.8/5 \u2014 Customers love the quality and quick delivery.",
+                        "\u2b50 4.7/5 \u2014 Reliable seller and premium packaging.",
+                        "\u2b50 4.9/5 \u2014 Great value for money and easy returns."
+                    ],
+                    "seller": "Reliance Digital"
+                }
+            ],
+            "total": 1299.0,
+            "platform_fee": 129.9,
+            "seller_share": 1169.1,
+            "expected_delivery": "11 Jun 2026",
+            "status": "Placed",
+            "created_at": "2026-06-06 16:02:18"
+        },
+        {
+            "order_number": "ORD-20260607152337-14",
+            "buyer": "ramaraju1",
+            "items": [
+                {
+                    "category": "Supplier Item",
+                    "description": "Desc",
+                    "image_path": "products/generic.svg",
+                    "image_paths": [
+                        "products/generic.svg"
+                    ],
+                    "image_urls": [
+                        "products/generic.svg"
+                    ],
+                    "name": "Widget",
+                    "price": "10",
+                    "quantity": "5",
+                    "reviews": [
+                        "\u2b50 4.8/5 \u2014 Customers love the quality and quick delivery.",
+                        "\u2b50 4.7/5 \u2014 Reliable seller and premium packaging.",
+                        "\u2b50 4.9/5 \u2014 Great value for money and easy returns."
+                    ],
+                    "seller": "Test Supplier",
+                    "seller_username": "supplier_b0bce146"
+                }
+            ],
+            "total": 10.0,
+            "platform_fee": 1.0,
+            "seller_share": 9.0,
+            "expected_delivery": "12 Jun 2026",
+            "status": "Placed",
+            "created_at": "2026-06-07 15:23:37"
+        },
+        {
+            "order_number": "ORD-20260608102151-15",
+            "buyer": "121212",
+            "items": [
+                {
+                    "category": "Supplier Item",
+                    "description": "NEO 10R",
+                    "image_path": "products/uploads/d653530783bf473bbe2198f589a8eec3.jpg",
+                    "image_paths": [
+                        "products/uploads/d653530783bf473bbe2198f589a8eec3.jpg"
+                    ],
+                    "image_urls": [
+                        "products/uploads/d653530783bf473bbe2198f589a8eec3.jpg"
+                    ],
+                    "name": "Iqoo",
+                    "price": "30000",
+                    "quantity": 2,
+                    "reviews": [
+                        "\u2b50 4.8/5 \u2014 Customers love the quality and quick delivery.",
+                        "\u2b50 4.7/5 \u2014 Reliable seller and premium packaging.",
+                        "\u2b50 4.9/5 \u2014 Great value for money and easy returns."
+                    ],
+                    "seller": "Rama raju uppalapati",
+                    "seller_username": "ramu"
+                }
+            ],
+            "total": 30000.0,
+            "platform_fee": 3000.0,
+            "seller_share": 27000.0,
+            "expected_delivery": "13 Jun 2026",
+            "status": "Placed",
+            "created_at": "2026-06-08 10:21:51"
+        },
+        {
+            "order_number": "ORD-20260608165012-16",
+            "buyer": "121212",
+            "items": [
+                {
+                    "category": "Supplier Item",
+                    "description": "electronics",
+                    "image_path": "products/generic.svg",
+                    "image_paths": [
+                        "products/generic.svg"
+                    ],
+                    "image_urls": [
+                        "products/generic.svg"
+                    ],
+                    "name": "washing machine",
+                    "price": "3000",
+                    "quantity": 2,
+                    "reviews": [
+                        "\u2b50 4.8/5 \u2014 Customers love the quality and quick delivery.",
+                        "\u2b50 4.7/5 \u2014 Reliable seller and premium packaging.",
+                        "\u2b50 4.9/5 \u2014 Great value for money and easy returns."
+                    ],
+                    "seller": "ramaraju",
+                    "seller_username": "ramaraju"
+                }
+            ],
+            "total": 3000.0,
+            "platform_fee": 300.0,
+            "seller_share": 2700.0,
+            "expected_delivery": "13 Jun 2026",
+            "status": "Placed",
+            "created_at": "2026-06-08 16:50:12"
+        },
+        {
+            "order_number": "ORD-20260611125259-17",
+            "buyer": "12121212",
+            "items": [
+                {
+                    "category": "Supplier Item",
+                    "description": "NEO 10R",
+                    "image_path": "products/uploads/d653530783bf473bbe2198f589a8eec3.jpg",
+                    "image_paths": [
+                        "products/uploads/d653530783bf473bbe2198f589a8eec3.jpg"
+                    ],
+                    "image_urls": [
+                        "products/uploads/d653530783bf473bbe2198f589a8eec3.jpg"
+                    ],
+                    "name": "Iqoo",
+                    "price": "30000",
+                    "quantity": 1,
+                    "reviews": [
+                        "\u2b50 4.8/5 \u2014 Customers love the quality and quick delivery.",
+                        "\u2b50 4.7/5 \u2014 Reliable seller and premium packaging.",
+                        "\u2b50 4.9/5 \u2014 Great value for money and easy returns."
+                    ],
+                    "seller": "Rama raju uppalapati",
+                    "seller_username": "ramu"
+                }
+            ],
+            "total": 30000.0,
+            "platform_fee": 3000.0,
+            "seller_share": 27000.0,
+            "expected_delivery": "16 Jun 2026",
+            "status": "Placed",
+            "created_at": "2026-06-11 12:52:59"
         }
     ],
-    "platform_credits": 7999.5
+    "platform_credits": 23880.0,
+    "email_outbox": [
+        {
+            "to": "ram@gmail.com",
+            "subject": "E buy order confirmation: ORD-20260606130839-8",
+            "body": "Hello ram,\n\nThank you for shopping with E buy. Your order has been confirmed.\n\nOrder number: ORD-20260606130839-8\nStatus: Placed\nTotal: Rs. 14999.0\nExpected delivery: 11 Jun 2026\n\nItems:\n- 5G Smartphone \u2014 Rs. 14999\n\nYou can open your E buy orders page to track this order.\n",
+            "order_number": "ORD-20260606130839-8",
+            "created_at": "2026-06-06 13:08:39",
+            "status": "queued"
+        },
+        {
+            "to": "ramuppalapati665@gmail.com",
+            "subject": "E buy order confirmation: ORD-20260606142952-9",
+            "body": "Hello ramaraju,\n\nThank you for shopping with E buy. Your order has been confirmed.\n\nOrder details\nOrder number: ORD-20260606142952-9\nPlaced on: 2026-06-06 14:29:52\nStatus: Placed\nExpected delivery: 11 Jun 2026\n\nBuyer details\nName: ramaraju\nEmail: ramuppalapati665@gmail.com\nPhone: 1234567890\nDelivery address: 12345\n\nPayment details\nItems total: Rs. 28999.0\nPlatform fee: Rs. 2899.9\nSeller payout: Rs. 26099.1\nAmount paid: Rs. 28999.0\n\nItems:\n1. LED Smart TV\n   Price: Rs. 28999\n   Seller: Vijay Sales\n   Category: Electronics\n   Description: Full HD smart TV with built-in apps and slim design.\n\nYou can open your E buy orders page to track this order.\n",
+            "order_number": "ORD-20260606142952-9",
+            "created_at": "2026-06-06 14:29:52",
+            "status": "queued"
+        },
+        {
+            "to": "ramuppalapati665@gmail.com",
+            "subject": "E buy order confirmation: ORD-20260606143608-10",
+            "body": "Hello ramaraju,\n\nThank you for shopping with E buy. Your order has been confirmed.\n\nOrder details\nOrder number: ORD-20260606143608-10\nPlaced on: 2026-06-06 14:36:08\nStatus: Placed\nExpected delivery: 11 Jun 2026\n\nBuyer details\nName: ramaraju\nEmail: ramuppalapati665@gmail.com\nPhone: 1234567890\nDelivery address: 12345\n\nPayment details\nItems total: Rs. 2499.0\nPlatform fee: Rs. 249.9\nSeller payout: Rs. 2249.1\nAmount paid: Rs. 2499.0\n\nItems:\n1. JioFiber Router\n   Price: Rs. 2499\n   Seller: Jio Store\n   Category: Electronics\n   Description: High speed Wi-Fi router for home internet and streaming.\n\nYou can open your E buy orders page to track this order.\n",
+            "order_number": "ORD-20260606143608-10",
+            "created_at": "2026-06-06 14:36:08",
+            "status": "queued"
+        },
+        {
+            "to": "ramuppalapati665@gmail.com",
+            "subject": "E buy order confirmation: ORD-20260606144249-11",
+            "body": "Hello ramaraju,\n\nThank you for shopping with E buy. Your order has been confirmed.\n\nOrder details\nOrder number: ORD-20260606144249-11\nPlaced on: 2026-06-06 14:42:49\nStatus: Placed\nExpected delivery: 11 Jun 2026\n\nBuyer details\nName: ramaraju\nEmail: ramuppalapati665@gmail.com\nPhone: 1234567890\nDelivery address: 12345\n\nPayment details\nItems total: Rs. 30000.0\nPlatform fee: Rs. 3000.0\nSeller payout: Rs. 27000.0\nAmount paid: Rs. 30000.0\n\nItems:\n1. Iqoo\n   Price: Rs. 30000\n   Seller: Rama raju uppalapati\n   Category: Supplier Item\n   Description: NEO 10R\n\nYou can open your E buy orders page to track this order.\n",
+            "order_number": "ORD-20260606144249-11",
+            "created_at": "2026-06-06 14:42:49",
+            "status": "sent"
+        },
+        {
+            "to": "ramuppalapati665@gmail.com",
+            "subject": "E buy order confirmation: ORD-20260606145044-12",
+            "body": "Hello ramaraju,\n\nThank you for shopping with E buy. Your order has been confirmed.\n\nOrder details\nOrder number: ORD-20260606145044-12\nPlaced on: 2026-06-06 14:50:44\nStatus: Placed\nExpected delivery: 11 Jun 2026\n\nBuyer details\nName: ramaraju\nEmail: ramuppalapati665@gmail.com\nPhone: 1234567890\nDelivery address: 12345\n\nPayment details\nItems total: Rs. 14999.0\nPlatform fee: Rs. 1499.9\nSeller payout: Rs. 13499.1\nAmount paid: Rs. 14999.0\n\nItems:\n1. 5G Smartphone\n   Price: Rs. 14999\n   Seller: Reliance Digital\n   Category: Electronics\n   Description: Fast 5G phone with bright display, long battery life, and dual camera.\n\nYou can open your E buy orders page to track this order.\n",
+            "order_number": "ORD-20260606145044-12",
+            "created_at": "2026-06-06 14:50:44",
+            "status": "queued"
+        },
+        {
+            "to": "ramuppalapati665@gmail.com",
+            "subject": "E buy order confirmation: ORD-20260606160218-13",
+            "body": "Hello ramaraju,\n\nThank you for shopping with E buy. Your order has been confirmed.\n\nOrder details\nOrder number: ORD-20260606160218-13\nPlaced on: 2026-06-06 16:02:18\nStatus: Placed\nExpected delivery: 11 Jun 2026\n\nBuyer details\nName: ramaraju\nEmail: ramuppalapati665@gmail.com\nPhone: 1234567890\nDelivery address: 12345\n\nPayment details\nItems total: Rs. 1299.0\nPlatform fee: Rs. 129.9\nSeller payout: Rs. 1169.1\nAmount paid: Rs. 1299.0\n\nItems:\n1. Bluetooth Speaker\n   Price: Rs. 1299\n   Seller: Reliance Digital\n   Category: Electronics\n   Description: Portable speaker with punchy sound and all-day battery.\n\nYou can open your E buy orders page to track this order.\n",
+            "order_number": "ORD-20260606160218-13",
+            "created_at": "2026-06-06 16:02:18",
+            "status": "queued"
+        },
+        {
+            "to": "ramuppalapati665@gmail.com",
+            "subject": "E buy order confirmation: ORD-20260607152337-14",
+            "body": "Hello ramaraju,\n\nThank you for shopping with E buy. Your order has been confirmed.\n\nOrder details\nOrder number: ORD-20260607152337-14\nPlaced on: 2026-06-07 15:23:37\nStatus: Placed\nExpected delivery: 12 Jun 2026\n\nBuyer details\nName: ramaraju\nEmail: ramuppalapati665@gmail.com\nPhone: 1234567890\nDelivery address: 12345\n\nPayment details\nItems total: Rs. 10.0\nPlatform fee: Rs. 1.0\nSeller payout: Rs. 9.0\nAmount paid: Rs. 10.0\n\nItems:\n1. Widget\n   Price: Rs. 10\n   Seller: Test Supplier\n   Category: Supplier Item\n   Description: Desc\n\nYou can open your E buy orders page to track this order.\n",
+            "order_number": "ORD-20260607152337-14",
+            "created_at": "2026-06-07 15:23:37",
+            "status": "queued"
+        },
+        {
+            "to": "ramaraju5131@gmail.com",
+            "subject": "E buy order confirmation: ORD-20260608102151-15",
+            "body": "Hello 1234454321,\n\nThank you for shopping with E buy. Your order has been confirmed.\n\nOrder details\nOrder number: ORD-20260608102151-15\nPlaced on: 2026-06-08 10:21:51\nStatus: Placed\nExpected delivery: 13 Jun 2026\n\nBuyer details\nName: 1234454321\nEmail: ramaraju5131@gmail.com\nPhone: 1234567890\nDelivery address: 5-45\r\nAnanthavaram\n\nPayment details\nItems total: Rs. 30000.0\nPlatform fee: Rs. 3000.0\nSeller payout: Rs. 27000.0\nAmount paid: Rs. 30000.0\n\nItems:\n1. Iqoo\n   Price: Rs. 30000\n   Seller: Rama raju uppalapati\n   Category: Supplier Item\n   Description: NEO 10R\n\nYou can open your E buy orders page to track this order.\n",
+            "order_number": "ORD-20260608102151-15",
+            "created_at": "2026-06-08 10:21:51",
+            "status": "queued"
+        },
+        {
+            "to": "ramaraju5131@gmail.com",
+            "subject": "E buy order confirmation: ORD-20260608165012-16",
+            "body": "Hello 1234454321,\n\nThank you for shopping with E buy. Your order has been confirmed.\n\nOrder details\nOrder number: ORD-20260608165012-16\nPlaced on: 2026-06-08 16:50:12\nStatus: Placed\nExpected delivery: 13 Jun 2026\n\nBuyer details\nName: 1234454321\nEmail: ramaraju5131@gmail.com\nPhone: 1234567890\nDelivery address: 5-45\r\nAnanthavaram\n\nPayment details\nItems total: Rs. 3000.0\nPlatform fee: Rs. 300.0\nSeller payout: Rs. 2700.0\nAmount paid: Rs. 3000.0\n\nItems:\n1. washing machine\n   Price: Rs. 3000\n   Seller: ramaraju\n   Category: Supplier Item\n   Description: electronics\n\nYou can open your E buy orders page to track this order.\n",
+            "order_number": "ORD-20260608165012-16",
+            "created_at": "2026-06-08 16:50:12",
+            "status": "queued"
+        },
+        {
+            "to": "ramaraju51318@gmail.com",
+            "subject": "E buy order confirmation: ORD-20260611125259-17",
+            "body": "Hello Rama raju uppalapati,\n\nThank you for shopping with E buy. Your order has been confirmed.\n\nOrder details\nOrder number: ORD-20260611125259-17\nPlaced on: 2026-06-11 12:52:59\nStatus: Placed\nExpected delivery: 16 Jun 2026\n\nBuyer details\nName: Rama raju uppalapati\nEmail: ramaraju51318@gmail.com\nPhone: 1234567890\nDelivery address: 5-45\r\nAnanthavaram\n\nPayment details\nItems total: Rs. 30000.0\nPlatform fee: Rs. 3000.0\nSeller payout: Rs. 27000.0\nAmount paid: Rs. 30000.0\n\nItems:\n1. Iqoo\n   Price: Rs. 30000\n   Seller: Rama raju uppalapati\n   Category: Supplier Item\n   Description: NEO 10R\n\nYou can open your E buy orders page to track this order.\n",
+            "order_number": "ORD-20260611125259-17",
+            "created_at": "2026-06-11 12:52:59",
+            "status": "queued"
+        }
+    ]
 }

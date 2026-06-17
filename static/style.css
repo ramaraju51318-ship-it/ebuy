@@ -748,9 +748,12 @@ dd {
 
 .order-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
 }
 
 .order-card {
+    display: block;
+    overflow: visible;
     align-items: stretch;
     border: 1px solid #dbe4ee;
     box-shadow: 0 12px 24px rgba(10, 19, 32, 0.08);
@@ -789,6 +792,46 @@ dd {
     border-radius: 10px;
     background: linear-gradient(135deg, #eff6ff, #ecfdf5);
     border: 1px solid #dbeafe;
+    box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
+}
+
+.track-order-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    cursor: pointer;
+    list-style: none;
+}
+
+.track-order-toggle::-webkit-details-marker {
+    display: none;
+}
+
+.tracking-box[open] .track-order-toggle {
+    padding-bottom: 12px;
+    border-bottom: 1px solid #dbeafe;
+}
+
+.track-order-toggle .mini-btn {
+    flex: 0 0 auto;
+}
+
+.tracking-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.tracking-pills span {
+    padding: 8px 10px;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #1f2937;
+    font-size: 12px;
+    font-weight: 700;
+    border: 1px solid #dbeafe;
 }
 
 .tracking-label {
@@ -807,6 +850,7 @@ dd {
 .timeline-list {
     display: grid;
     gap: 10px;
+    margin-top: 12px;
 }
 
 .timeline-row {

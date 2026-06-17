@@ -299,10 +299,21 @@ class ECommerceAppTests(unittest.TestCase):
         self.assertEqual(checkout_response.status_code, 200)
         self.assertIn("Order placed successfully", checkout_response.text)
         self.assertIn("Expected delivery", checkout_response.text)
+        self.assertIn("Track order", checkout_response.text)
+        self.assertIn("Tracking code", checkout_response.text)
 
         data = app_module.load_database()
         buyer = next(user for user in data["users"] if user["username"] == buyer_user)
         self.assertLess(buyer["credits"], 100000)
+        self.assertEqual(len(data["email_outbox"]), 1)
+        self.assertEqual(data["email_outbox"][0]["to"], "order_buyer@example.com")
+        self.assertEqual(data["email_outbox"][0]["status"], "queued")
+        self.assertIn("E buy order confirmation", data["email_outbox"][0]["subject"])
+        self.assertIn("Order details", data["email_outbox"][0]["body"])
+        self.assertIn("Buyer details", data["email_outbox"][0]["body"])
+        self.assertIn("Payment details", data["email_outbox"][0]["body"])
+        self.assertIn("Delivery address: Buyer address", data["email_outbox"][0]["body"])
+        self.assertIn("Order Item", data["email_outbox"][0]["body"])
 
     def test_checkout_and_orders_pages_use_no_store_cache(self):
         buyer_user = "cache_buyer"
@@ -581,6 +592,36 @@ class ECommerceAppTests(unittest.TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertIn("positive amount", response.text)
+
+    def test_supplier_can_switch_to_buyer_mode(self):
+        supplier_user = "mode_supplier"
+        self.client.post(
+            "/register",
+            data={
+                "role": "supplier",
+                "full_name": "Mode Supplier",
+                "username": supplier_user,
+                "email": "mode_supplier@example.com",
+                "phone": "1313131313",
+                "address": "Supplier address",
+                "password": "Secret123!",
+            },
+            follow_redirects=True,
+        )
+
+        self.client.post(
+            "/login",
+            data={"login_username": supplier_user, "login_password": "Secret123!"},
+            follow_redirects=True,
+        )
+
+        mode_response = self.client.get("/toggle-buyer-mode", follow_redirects=True)
+        self.assertEqual(mode_response.status_code, 200)
+        self.assertIn("Shopping mode enabled", mode_response.text)
+
+        dashboard_response = self.client.get("/dashboard", follow_redirects=True)
+        self.assertEqual(dashboard_response.status_code, 200)
+        self.assertIn("Products available for you", dashboard_response.text)
 
     def test_buyer_can_recharge_wallet(self):
         buyer_user = "recharge_buyer"

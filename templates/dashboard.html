@@ -25,11 +25,14 @@
                     <h1>{{ user.full_name }}</h1>
                 </div>
                 <div class="dashboard-actions">
-                    {% if user.role == 'buyer' %}
+                    {% if user.role == 'buyer' or session.get('buyer_mode') %}
                         <a class="logout account-toggle" href="#" onclick="event.preventDefault(); document.getElementById('account-panel').classList.toggle('open');">Account</a>
                         <a class="logout" href="{{ url_for('cart') }}">View cart ({{ cart_items|length }})</a>
                         <a class="logout" href="{{ url_for('orders') }}">Orders</a>
                         <a class="logout" href="{{ url_for('recharge') }}">Recharge</a>
+                    {% endif %}
+                    {% if user.role == 'supplier' %}
+                        <a class="logout" href="{{ url_for('toggle_buyer_mode') }}">{% if session.get('buyer_mode') %}Back to seller dashboard{% else %}Shop as buyer{% endif %}</a>
                     {% endif %}
                     <a class="logout" href="{{ url_for('logout') }}">Logout</a>
                 </div>
@@ -60,7 +63,7 @@
                 </dl>
             {% endif %}
 
-            {% if user.role == "supplier" %}
+            {% if user.role == "supplier" and not session.get('buyer_mode') %}
                 <section class="item-summary">
                     <h2>Listed Item</h2>
                     {% if user.item and user.item.name %}
@@ -137,7 +140,7 @@
                     {% endfor %}
                 </section>
 
-                {% if user.role == 'buyer' %}
+                {% if user.role == 'buyer' or session.get('buyer_mode') %}
                     <section id="account-panel" class="account-panel">
                         <article class="account-card">
                             <p class="eyebrow">Account overview</p>

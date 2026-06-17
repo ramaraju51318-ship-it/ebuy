@@ -1,7 +1,12 @@
+import email
 import json
+import os
 import random
+import re
+import smtplib
 import uuid
 from datetime import datetime, timedelta
+from email.message import EmailMessage
 from pathlib import Path
 
 from flask import Flask, flash, make_response, redirect, render_template, request, session, url_for
@@ -127,6 +132,9 @@ def password_meets_rules(password):
         and any(char.isdigit() for char in password)
         and any(not char.isalnum() for char in password)
     )
+def is_valid_email(email):
+    pattern = r'^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'
+    return re.match(pattern, email) is not None
 
 
 def generate_tracking_snapshot(order_number):
@@ -285,6 +293,7 @@ def save_uploaded_images(files_storage):
 
 def ensure_data_schema(data):
     data.setdefault("orders", [])
+    data.setdefault("email_outbox", [])
     data.setdefault("platform_credits", 0)
     for user in data.get("users", []):
         user.setdefault("credits", 100000 if user.get("role") == "buyer" else 0)
@@ -319,6 +328,13 @@ def email_exists(email):
     data = load_database()
     email = email.lower().strip()
     return any(user["email"].lower() == email for user in data["users"])
+
+
+def can_access_buyer_mode(user=None):
+    if user is None:
+        username = session.get("username")
+        user = find_user(username) if username else None
+    return bool(user and (user.get("role") == "buyer" or session.get("buyer_mode", False)))
 
 
 def get_supplier_products():
@@ -384,13 +400,21 @@ def register():
     if not all(required_fields):
         flash("Please complete all required registration fields.", "error")
         return redirect(url_for(registration_page))
-
+    
+    if not phone.isdigit() or len(phone) != 10:
+        flash("Phone number must contain exactly 10 digits and no special characters.", "error")
+        return redirect(url_for(registration_page))
+    
     if not password_meets_rules(password):
         flash("Password must be at least 8 characters with uppercase, lowercase, a number, and a symbol.", "error")
         return redirect(url_for(registration_page))
 
     if find_user(username):
         flash("That username is already taken. Please choose another one.", "error")
+        return redirect(url_for(registration_page))
+
+    if not is_valid_email(email):
+        flash("Please enter a valid email address.", "error")
         return redirect(url_for(registration_page))
 
     if email_exists(email):
@@ -433,16 +457,35 @@ def login():
     password = request.form.get("login_password", "")
 
     if not username or not password:
-        flash("Please enter both username and password to log in.", "error")
+        flash("Please enter atleast username and password to log in.", "error")
         return redirect(url_for("home"))
 
     user = find_user(username)
     if not user or not check_password_hash(user["password_hash"], password):
-        flash("Invalid username or password. Please check your details and try again.", "error")
+        flash("Invalid username or password. Please check your details one more time and try again.", "error")
         return redirect(url_for("home"))
 
     session["username"] = user["username"]
     flash(f"Welcome back, {user['full_name']}!", "success")
+    return redirect(url_for("dashboard"))
+
+
+@app.route("/toggle-buyer-mode")
+def toggle_buyer_mode():
+    if "username" not in session:
+        flash("Please log in first to switch shopping mode.", "error")
+        return redirect(url_for("home"))
+
+    user = find_user(session["username"])
+    if not user:
+        flash("Your session could not be found. Please log in again.", "error")
+        return redirect(url_for("home"))
+
+    session["buyer_mode"] = not session.get("buyer_mode", False)
+    if session["buyer_mode"]:
+        flash("Shopping mode enabled. You can browse products and place orders as a buyer.", "success")
+    else:
+        flash("Seller dashboard restored.", "success")
     return redirect(url_for("dashboard"))
 
 
@@ -461,13 +504,23 @@ def dashboard():
 
     products = []
     cart_items = session.get("cart", [])
-    if user["role"] == "buyer":
+    buyer_mode = can_access_buyer_mode(user)
+    if buyer_mode:
         products = SAMPLE_PRODUCTS + get_supplier_products()
         search_query = (request.args.get("search", "") or "").strip().lower()
         if search_query:
             products = [product for product in products if product_matches_search(product, search_query)]
+    else:
+        products = []
 
-    return render_template("dashboard.html", user=user, products=products, cart_items=cart_items, search_query=(request.args.get("search", "") or ""))
+    return render_template(
+        "dashboard.html",
+        user=user,
+        products=products,
+        cart_items=cart_items,
+        search_query=(request.args.get("search", "") or ""),
+        buyer_mode=buyer_mode,
+    )
 
 
 @app.route("/supplier/list-product", methods=["GET", "POST"])
@@ -540,13 +593,110 @@ def add_to_cart(item_index):
     return redirect(url_for("dashboard"))
 
 
+def build_order_confirmation_email(buyer, order):
+    item_lines = []
+    for index, item in enumerate(order.get("items", []), start=1):
+        item_lines.append(
+            "\n".join([
+                f"{index}. {item.get('name', 'Item')}",
+                f"   Price: Rs. {item.get('price', 0)}",
+                f"   Seller: {item.get('seller', 'E buy seller')}",
+                f"   Category: {item.get('category', 'General')}",
+                f"   Description: {item.get('description', 'No description provided')}",
+            ])
+        )
+
+    items_text = "\n".join(item_lines) if item_lines else "- Your ordered items"
+    subject = f"E buy order confirmation: {order['order_number']}"
+    body = f"""Hello {buyer.get('full_name', 'Buyer')},
+
+Thank you for shopping with E buy. Your order has been confirmed.
+
+Order details
+Order number: {order['order_number']}
+Placed on: {order.get('created_at', 'Just now')}
+Status: {order['status']}
+Expected delivery: {order['expected_delivery']}
+
+Buyer details
+Name: {buyer.get('full_name', 'Buyer')}
+Email: {buyer.get('email', 'Not provided')}
+Phone: {buyer.get('phone', 'Not provided')}
+Delivery address: {buyer.get('address', 'Not provided')}
+
+Payment details
+Items total: Rs. {order['total']}
+Platform fee: Rs. {order.get('platform_fee', 0)}
+Seller payout: Rs. {order.get('seller_share', 0)}
+Amount paid: Rs. {order['total']}
+
+Items:
+{items_text}
+
+You can open your E buy orders page to track this order.
+"""
+    return subject, body
+
+
+def send_order_confirmation_email(buyer, order, data):
+    recipient = buyer.get("email")
+    subject, body = build_order_confirmation_email(buyer, order)
+    email_record = {
+        "to": recipient,
+        "subject": subject,
+        "body": body,
+        "order_number": order["order_number"],
+        "created_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+    }
+
+    smtp_host = os.getenv("SMTP_HOST")
+    smtp_port = int(os.getenv("SMTP_PORT", "587"))
+    smtp_username = os.getenv("SMTP_USERNAME")
+    smtp_password = os.getenv("SMTP_PASSWORD")
+    sender = os.getenv("SMTP_SENDER") or smtp_username
+
+    if not smtp_host or not sender or not recipient:
+        email_record["status"] = "queued"
+        data.setdefault("email_outbox", []).append(email_record)
+        return "queued"
+
+    message = EmailMessage()
+    message["Subject"] = subject
+    message["From"] = sender
+    message["To"] = recipient
+    message.set_content(body)
+
+    try:
+        if os.getenv("SMTP_USE_SSL", "").lower() in {"1", "true", "yes"}:
+            with smtplib.SMTP_SSL(smtp_host, smtp_port) as smtp:
+                if smtp_username and smtp_password:
+                    smtp.login(smtp_username, smtp_password)
+                smtp.send_message(message)
+        else:
+            with smtplib.SMTP(smtp_host, smtp_port) as smtp:
+                if os.getenv("SMTP_STARTTLS", "true").lower() not in {"0", "false", "no"}:
+                    smtp.starttls()
+                if smtp_username and smtp_password:
+                    smtp.login(smtp_username, smtp_password)
+                smtp.send_message(message)
+    except (OSError, smtplib.SMTPException) as error:
+        email_record["status"] = "failed"
+        email_record["error"] = str(error)
+        data.setdefault("email_outbox", []).append(email_record)
+        return "failed"
+
+    email_record["status"] = "sent"
+    data.setdefault("email_outbox", []).append(email_record)
+    return "sent"
+
+
 def place_order_from_cart():
     if "username" not in session:
         flash("Please log in to place an order.", "error")
         return redirect(url_for("home"))
 
     buyer = find_user(session["username"])
-    if not buyer or buyer.get("role") != "buyer":
+    if not can_access_buyer_mode(buyer):
         flash("Only buyers can place orders.", "error")
         return redirect(url_for("dashboard"))
 
@@ -591,7 +741,7 @@ def place_order_from_cart():
 
     order_number = f"ORD-{datetime.now().strftime('%Y%m%d%H%M%S')}-{len(data.get('orders', [])) + 1}"
     expected_delivery = (datetime.now() + timedelta(days=5)).strftime("%d %b %Y")
-    data.setdefault("orders", []).append({
+    order = {
         "order_number": order_number,
         "buyer": buyer_record["username"],
         "items": cart_items,
@@ -601,12 +751,19 @@ def place_order_from_cart():
         "expected_delivery": expected_delivery,
         "status": "Placed",
         "created_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-    })
+    }
+    data.setdefault("orders", []).append(order)
+    email_status = send_order_confirmation_email(buyer_record, order, data)
 
     save_database(data)
     session["cart"] = []
 
-    flash(f"Order placed successfully. Expected delivery: {expected_delivery}", "success")
+    if email_status == "sent":
+        flash(f"Order placed successfully. A confirmation email was sent to {buyer_record['email']}. Expected delivery: {expected_delivery}", "success")
+    elif email_status == "queued":
+        flash(f"Order placed successfully. Confirmation email queued for {buyer_record['email']}. Expected delivery: {expected_delivery}", "success")
+    else:
+        flash(f"Order placed successfully, but confirmation email could not be sent. Expected delivery: {expected_delivery}", "success")
     return redirect(url_for("orders"))
 
 
@@ -617,7 +774,7 @@ def checkout():
         return redirect(url_for("home"))
 
     buyer = find_user(session["username"])
-    if not buyer or buyer.get("role") != "buyer":
+    if not can_access_buyer_mode(buyer):
         flash("Only buyers can place orders.", "error")
         return redirect(url_for("dashboard"))
 
